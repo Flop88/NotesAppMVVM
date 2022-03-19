@@ -31,7 +31,9 @@ fun StartScreen(navController: NavHostController) {
                 onClick = {
                     navController.navigate(route = NavRoute.Main.route)
                 },
-                modifier = Modifier.padding(vertical = 8.dp)
+                modifier = Modifier
+                    .width(200.dp)
+                    .padding(vertical = 8.dp)
             ) {
                 Text(text = "Room database")
             }
@@ -39,7 +41,9 @@ fun StartScreen(navController: NavHostController) {
                 onClick = {
                     navController.navigate(route = NavRoute.Main.route)
                 },
-                modifier = Modifier.padding(vertical = 8.dp)
+                modifier = Modifier
+                    .width(200.dp)
+                    .padding(vertical = 8.dp)
             ) {
                 Text(text = "Firebase database")
             }

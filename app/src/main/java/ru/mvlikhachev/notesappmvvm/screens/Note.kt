@@ -30,8 +30,8 @@ fun NoteScreen(navController: NavHostController) {
         ) {
             Card(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 24.dp)
+                    .fillMaxSize()
+                    .padding(all = 32.dp)
                     .clickable { Log.d("checkData", "Clicked on card item") },
                 elevation = 6.dp
             ) {
@@ -40,11 +40,17 @@ fun NoteScreen(navController: NavHostController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "title",
+                        text = "Title",
                         fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = 32.dp)
                     )
-                    Text(text = "subtitle")
+                    Text(
+                        text = "Subtitle",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Light,
+                        modifier = Modifier.padding(top = 16.dp)
+                    )
                 }
             }
         }
