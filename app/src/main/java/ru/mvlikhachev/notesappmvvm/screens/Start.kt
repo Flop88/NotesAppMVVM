@@ -1,6 +1,5 @@
 package ru.mvlikhachev.notesappmvvm.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -17,7 +16,6 @@ import ru.mvlikhachev.notesappmvvm.ui.theme.NotesAppMVVMTheme
 
 @Composable
 fun StartScreen(navController: NavHostController) {
-    Log.d("checkData", "navigator: ${navController.currentBackStackEntry?.destination?.route}")
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -55,6 +53,6 @@ fun StartScreen(navController: NavHostController) {
 @Composable
 fun prevStartScreen() {
     NotesAppMVVMTheme {
-        StartScreen(rememberNavController())
+        StartScreen(navController = rememberNavController())
     }
 }

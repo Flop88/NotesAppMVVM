@@ -1,6 +1,5 @@
 package ru.mvlikhachev.notesappmvvm.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,16 +12,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import ru.mvlikhachev.notesappmvvm.navigation.NavRoute
+import ru.mvlikhachev.notesappmvvm.ui.theme.NotesAppMVVMTheme
 
 @Composable
 fun AddScreen(navController: NavHostController) {
-    Log.d("checkData", "navigator: ${navController.currentBackStackEntry?.destination?.route}")
-    var title by remember { mutableStateOf("") }
-    var subtitle by remember { mutableStateOf("") }
+    var title by remember { mutableStateOf("")}
+    var subtitle by remember { mutableStateOf("")}
     Scaffold {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -30,20 +31,20 @@ fun AddScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Add new Note",
+                text = "Add new note",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
             OutlinedTextField(
                 value = title,
-                onValueChange = { title = it },
-                label = { Text("Note title") }
+                onValueChange =  { title = it },
+                label = { Text(text = "Note title") }
             )
             OutlinedTextField(
                 value = subtitle,
-                onValueChange = { subtitle = it },
-                label = { Text("Note subtitle") }
+                onValueChange =  { subtitle = it },
+                label = { Text(text = "Note subtitle") }
             )
             Button(
                 modifier = Modifier.padding(top = 16.dp),
@@ -51,8 +52,16 @@ fun AddScreen(navController: NavHostController) {
                     navController.navigate(NavRoute.Main.route)
                 }
             ) {
-                Text(text = "Add")
+                Text(text = "Add note")
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun prevAddScreen() {
+    NotesAppMVVMTheme {
+        AddScreen(navController = rememberNavController())
     }
 }

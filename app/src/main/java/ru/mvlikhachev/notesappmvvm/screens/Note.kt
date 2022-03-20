@@ -1,8 +1,9 @@
 package ru.mvlikhachev.notesappmvvm.screens
 
-import android.util.Log
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -19,7 +20,6 @@ import ru.mvlikhachev.notesappmvvm.ui.theme.NotesAppMVVMTheme
 
 @Composable
 fun NoteScreen(navController: NavHostController) {
-    Log.d("checkData", "navigator: ${navController.currentBackStackEntry?.destination?.route}")
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -31,9 +31,7 @@ fun NoteScreen(navController: NavHostController) {
             Card(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(all = 32.dp)
-                    .clickable { Log.d("checkData", "Clicked on card item") },
-                elevation = 6.dp
+                    .padding(32.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(vertical = 8.dp),
@@ -61,6 +59,6 @@ fun NoteScreen(navController: NavHostController) {
 @Composable
 fun prevNoteScreen() {
     NotesAppMVVMTheme {
-        NoteScreen(rememberNavController())
+        NoteScreen(navController = rememberNavController())
     }
 }

@@ -24,19 +24,23 @@ import ru.mvlikhachev.notesappmvvm.ui.theme.NotesAppMVVMTheme
 fun MainScreen(navController: NavHostController) {
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                navController.navigate(NavRoute.Add.route)
-            }) {
-                Icon(imageVector = Icons.Filled.Add, contentDescription = "", tint = Color.White)
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(NavRoute.Add.route)
+                }) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Add Icons",
+                    tint = Color.White
+                )
             }
-        },
-        isFloatingActionButtonDocked = true
+        }
     ) {
         Column() {
-            NoteItem(title = "Note 1", subtitle = "Description for note 1", navController = navController)
-            NoteItem(title = "Note 2", subtitle = "Description for note 2", navController = navController)
-            NoteItem(title = "Note 3", subtitle = "Description for note 3", navController = navController)
-            NoteItem(title = "Note 4", subtitle = "Description for note 4", navController = navController)
+            NoteItem(title = "Note 1", subtitle = "Subtitle for note 1", navController = navController)
+            NoteItem(title = "Note 2", subtitle = "Subtitle for note 2", navController = navController)
+            NoteItem(title = "Note 3", subtitle = "Subtitle for note 3", navController = navController)
+            NoteItem(title = "Note 4", subtitle = "Subtitle for note 4", navController = navController)
         }
     }
 }
@@ -70,6 +74,6 @@ fun NoteItem(title: String, subtitle: String, navController: NavHostController) 
 @Composable
 fun prevMainScreen() {
     NotesAppMVVMTheme {
-        MainScreen(rememberNavController())
+        MainScreen(navController = rememberNavController())
     }
 }
