@@ -17,11 +17,11 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
 
     val context = application
 
-    fun initDatabase(type: String, onSuccess:() -> Unit) {
+    fun initDatabase(type: String, onSuccess: ()-> Unit) {
         Log.d("checkData", "MainViewModel initDatabase with type: $type")
         when(type) {
             TYPE_ROOM -> {
-                val dao = AppRoomDatabase.getInstance(context).getRoomDao()
+                val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
                 REPOSITORY = RoomRepository(dao)
                 onSuccess()
             }

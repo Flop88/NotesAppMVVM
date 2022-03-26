@@ -63,10 +63,10 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun prevNoteScreen() {
-    val context = LocalContext.current
-    val mViewModel: MainViewModel =
-        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
     NotesAppMVVMTheme {
+        val context = LocalContext.current
+        val mViewModel: MainViewModel =
+            viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
         NoteScreen(navController = rememberNavController(), viewModel = mViewModel)
     }
 }

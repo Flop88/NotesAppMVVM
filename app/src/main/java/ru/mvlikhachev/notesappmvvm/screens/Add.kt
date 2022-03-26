@@ -65,7 +65,7 @@ fun AddScreen(navController: NavHostController, viewModel: MainViewModel) {
                 modifier = Modifier.padding(top = 16.dp),
                 enabled = isButtonEnabled,
                 onClick = {
-                    viewModel.addNote(Note(title = title, subtitle = subtitle)) {
+                    viewModel.addNote(note =  Note(title = title, subtitle = subtitle)) {
                         navController.navigate(NavRoute.Main.route)
                     }
                 }
@@ -79,10 +79,10 @@ fun AddScreen(navController: NavHostController, viewModel: MainViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun prevAddScreen() {
-    val context = LocalContext.current
-    val mViewModel: MainViewModel =
-        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
     NotesAppMVVMTheme {
+        val context = LocalContext.current
+        val mViewModel: MainViewModel =
+            viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
         AddScreen(navController = rememberNavController(), viewModel = mViewModel)
     }
 }
