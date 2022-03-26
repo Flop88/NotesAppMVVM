@@ -22,10 +22,7 @@ import ru.mvlikhachev.notesappmvvm.utils.TYPE_FIREBASE
 import ru.mvlikhachev.notesappmvvm.utils.TYPE_ROOM
 
 @Composable
-fun StartScreen(navController: NavHostController) {
-    val context = LocalContext.current
-    val mViewModel: MainViewModel =
-        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -37,7 +34,7 @@ fun StartScreen(navController: NavHostController) {
             Text(text = "What will we use?")
             Button(
                 onClick = {
-                    mViewModel.initDatabase(TYPE_ROOM) {
+                    viewModel.initDatabase(TYPE_ROOM) {
                         navController.navigate(route = NavRoute.Main.route)
                     }
                 },
@@ -49,7 +46,7 @@ fun StartScreen(navController: NavHostController) {
             }
             Button(
                 onClick = {
-                    mViewModel.initDatabase(TYPE_FIREBASE) {
+                    viewModel.initDatabase(TYPE_FIREBASE) {
                         navController.navigate(route = NavRoute.Main.route)
                     }
                 },
@@ -66,7 +63,10 @@ fun StartScreen(navController: NavHostController) {
 @Preview(showBackground = true)
 @Composable
 fun prevStartScreen() {
+    val context = LocalContext.current
+    val mViewModel: MainViewModel =
+        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
     NotesAppMVVMTheme {
-        StartScreen(navController = rememberNavController())
+        StartScreen(navController = rememberNavController(), viewModel = mViewModel)
     }
 }

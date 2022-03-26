@@ -30,10 +30,8 @@ import ru.mvlikhachev.notesappmvvm.navigation.NavRoute
 import ru.mvlikhachev.notesappmvvm.ui.theme.NotesAppMVVMTheme
 
 @Composable
-fun MainScreen(navController: NavHostController) {
-    val context = LocalContext.current
-    val mViewModel: MainViewModel =
-        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
+    val notes = viewModel.readAllNotes().observeAsState(listOf()).value
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -48,17 +46,17 @@ fun MainScreen(navController: NavHostController) {
             }
         }
     ) {
-        Column() {
-            NoteItem(Note(title = "Note 1", subtitle = "Subtitle for note 1"), navController = navController)
-            NoteItem(Note(title = "Note 2", subtitle = "Subtitle for note 2"), navController = navController)
-            NoteItem(Note(title = "Note 3", subtitle = "Subtitle for note 3"), navController = navController)
-            NoteItem(Note(title = "Note 4", subtitle = "Subtitle for note 4"), navController = navController)
-        }
-//        LazyColumn {
-//            items(notes) { note ->
-//                NoteItem(note = note, navController = navController)
-//            }
+//        Column() {
+//            NoteItem(Note(title = "Note 1", subtitle = "Subtitle for note 1"), navController = navController)
+//            NoteItem(Note(title = "Note 2", subtitle = "Subtitle for note 2"), navController = navController)
+//            NoteItem(Note(title = "Note 3", subtitle = "Subtitle for note 3"), navController = navController)
+//            NoteItem(Note(title = "Note 4", subtitle = "Subtitle for note 4"), navController = navController)
 //        }
+        LazyColumn {
+            items(notes) { note ->
+                NoteItem(note = note, navController = navController)
+            }
+        }
     }
 }
 
@@ -90,7 +88,10 @@ fun NoteItem(note: Note, navController: NavHostController) {
 @Preview(showBackground = true)
 @Composable
 fun prevMainScreen() {
+    val context = LocalContext.current
+    val mViewModel: MainViewModel =
+        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
     NotesAppMVVMTheme {
-        MainScreen(navController = rememberNavController())
+        MainScreen(navController = rememberNavController(), viewModel = mViewModel)
     }
 }
