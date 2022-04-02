@@ -13,4 +13,8 @@ interface DatabaseRepository {
 
     suspend fun delete(note: Note, onSuccess: ()-> Unit)
 
+    fun connectToDatabase(onSuccess: () -> Unit, onFail: (String) -> Unit) { }
+
+    fun signOut() {}
+
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.mvlikhachev.notesappmvvm.database.firebase.AppFirebaseRepository
 import ru.mvlikhachev.notesappmvvm.database.room.AppRoomDatabase
 import ru.mvlikhachev.notesappmvvm.database.room.repository.RoomRepository
 import ru.mvlikhachev.notesappmvvm.model.Note
@@ -24,6 +25,13 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
                 val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
                 REPOSITORY = RoomRepository(dao)
                 onSuccess()
+            }
+            TYPE_FIREBASE -> {
+                REPOSITORY = AppFirebaseRepository()
+                REPOSITORY.connectToDatabase(
+                    { onSuccess() },
+                    { Log.d("checkData", "Error: ${it}")}
+                )
             }
         }
     }
@@ -60,25 +68,6 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
 
     fun readAllNotes() = REPOSITORY.readAll
 
-    fun deleteNote(note: Note, onSuccess: () -> Unit) {
-        viewModelScope.launch(Dispatchers.IO) {
-            REPOSITORY.delete(note = note) {
-                viewModelScope.launch(Dispatchers.Main) {
-                    onSuccess()
-                }
-            }
-        }
-    }
-
-    fun updateNote(note: Note, onSuccess: () -> Unit) {
-        viewModelScope.launch(Dispatchers.IO) {
-            REPOSITORY.update(note = note) {
-                viewModelScope.launch(Dispatchers.Main) {
-                    onSuccess()
-                }
-            }
-        }
-    }
 }
 
 class MainViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
