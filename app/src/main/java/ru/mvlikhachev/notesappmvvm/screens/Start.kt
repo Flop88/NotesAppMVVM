@@ -29,6 +29,7 @@ import ru.mvlikhachev.notesappmvvm.utils.Constants.Keys.WHAT_WILL_WE_USE
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
+
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val coroutineScope = rememberCoroutineScope()
     var login by remember { mutableStateOf(Constants.Keys.EMPTY) }
@@ -46,7 +47,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                         .padding(all = 32.dp)
                 ) {
                     Text(
-                        text = Constants.Keys.EDIT_NOTE,
+                        text = Constants.Keys.LOG_IN,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(vertical = 8.dp)
@@ -54,13 +55,13 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                     OutlinedTextField(
                         value = login,
                         onValueChange = { login = it },
-                        label = { Text(text = Constants.Keys.LOGIN) },
+                        label = { Text(text = Constants.Keys.LOGIN_TEXT) },
                         isError = login.isEmpty()
                     )
                     OutlinedTextField(
                         value = password,
                         onValueChange = { password = it },
-                        label = { Text(text = Constants.Keys.PASSWORD) },
+                        label = { Text(text = Constants.Keys.PASSWORD_TEXT) },
                         isError = password.isEmpty()
                     )
                     Button(
@@ -68,13 +69,13 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                         onClick = {
                             LOGIN = login
                             PASSWORD = password
-                            viewModel.initDatabase(TYPE_FIREBASE) {
-                                Log.d("checkData", "Success auth")
-                            }
+                           viewModel.initDatabase(TYPE_FIREBASE) {
+                                Log.d("checkData", "Auth success")
+                           }
                         },
                         enabled = login.isNotEmpty() && password.isNotEmpty()
                     ) {
-                        Text(text = Constants.Keys.SING_IN)
+                        Text(text = Constants.Keys.SIGN_IN)
                     }
                 }
             }

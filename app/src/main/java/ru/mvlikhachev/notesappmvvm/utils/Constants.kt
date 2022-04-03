@@ -31,9 +31,10 @@ object  Constants {
         const val EDIT_NOTE = "Edit note"
         const val EMPTY = ""
         const val UPDATE_NOTE = "Update note"
-        const val SING_IN = "Sing In"
-        const val LOGIN = "Login"
-        const val PASSWORD = "Password"
+        const val SIGN_IN = "Sign In"
+        const val LOG_IN = "Log In"
+        const val LOGIN_TEXT = "Login"
+        const val PASSWORD_TEXT = "Password"
     }
 
     object Screens {
