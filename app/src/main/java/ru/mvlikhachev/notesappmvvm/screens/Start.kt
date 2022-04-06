@@ -1,7 +1,6 @@
 package ru.mvlikhachev.notesappmvvm.screens
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -70,6 +69,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                             LOGIN = login
                             PASSWORD = password
                            viewModel.initDatabase(TYPE_FIREBASE) {
+                               DB_TYPE = TYPE_FIREBASE
                                 navController.navigate(NavRoute.Main.route)
                            }
                         },
@@ -93,6 +93,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                 Button(
                     onClick = {
                         viewModel.initDatabase(TYPE_ROOM) {
+                            DB_TYPE = TYPE_ROOM
                             navController.navigate(route = NavRoute.Main.route)
                         }
 
