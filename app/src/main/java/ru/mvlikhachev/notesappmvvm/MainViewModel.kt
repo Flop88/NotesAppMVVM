@@ -9,9 +9,7 @@ import ru.mvlikhachev.notesappmvvm.database.firebase.AppFirebaseRepository
 import ru.mvlikhachev.notesappmvvm.database.room.AppRoomDatabase
 import ru.mvlikhachev.notesappmvvm.database.room.repository.RoomRepository
 import ru.mvlikhachev.notesappmvvm.model.Note
-import ru.mvlikhachev.notesappmvvm.utils.REPOSITORY
-import ru.mvlikhachev.notesappmvvm.utils.TYPE_FIREBASE
-import ru.mvlikhachev.notesappmvvm.utils.TYPE_ROOM
+import ru.mvlikhachev.notesappmvvm.utils.*
 import java.lang.IllegalArgumentException
 
 class MainViewModel (application: Application) : AndroidViewModel(application) {
@@ -67,6 +65,18 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
     }
 
     fun readAllNotes() = REPOSITORY.readAll
+
+    fun signOut(onSuccess: () -> Unit) {
+        when (DB_TYPE.value) {
+            TYPE_FIREBASE,
+            TYPE_ROOM -> {
+                REPOSITORY.signOut()
+                DB_TYPE.value = Constants.Keys.EMPTY
+                onSuccess()
+            }
+            else -> { Log.d("checkData", "signOut: ELSE: ${DB_TYPE.value}")}
+        }
+    }
 }
 
 class MainViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
