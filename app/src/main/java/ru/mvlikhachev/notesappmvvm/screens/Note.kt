@@ -31,12 +31,12 @@ import ru.mvlikhachev.notesappmvvm.utils.TYPE_ROOM
 @Composable
 fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteId: String?) {
     val notes = viewModel.readAllNotes().observeAsState(listOf()).value
-    val note = when(DB_TYPE) {
+    val note = when(DB_TYPE.value) {
         TYPE_ROOM -> {
-            notes.firstOrNull{ it.id == noteId?.toInt()} ?: Note()
+            notes.firstOrNull { it.id == noteId?.toInt() } ?: Note()
         }
         TYPE_FIREBASE -> {
-            notes.firstOrNull{ it.firebaseId == noteId} ?: Note()
+            notes.firstOrNull { it.firebaseId == noteId } ?: Note()
         }
         else -> Note()
     }

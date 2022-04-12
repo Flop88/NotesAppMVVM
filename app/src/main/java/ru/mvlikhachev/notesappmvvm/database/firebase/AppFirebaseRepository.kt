@@ -35,17 +35,17 @@ class AppFirebaseRepository : DatabaseRepository {
     }
 
     override suspend fun update(note: Note, onSuccess: () -> Unit) {
-        val noteId = database.push().key.toString()
-        val mapNote = hashMapOf<String, Any>()
+        val noteId = note.firebaseId
+        val mapNotes = hashMapOf<String, Any>()
 
-        mapNote[FIREBASE_ID] = noteId
-        mapNote[Constants.Keys.TITLE] = note.title
-        mapNote[Constants.Keys.SUBTITLE] = note.subtitle
+        mapNotes[FIREBASE_ID] = noteId
+        mapNotes[Constants.Keys.TITLE] = note.title
+        mapNotes[Constants.Keys.SUBTITLE] = note.subtitle
 
         database.child(noteId)
-            .updateChildren(mapNote)
+            .updateChildren(mapNotes)
             .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { Log.d("checkData", "Failed to update new note") }
+            .addOnFailureListener { Log.d("checkData", "Failed to update note") }
     }
 
     override suspend fun delete(note: Note, onSuccess: () -> Unit) {
